@@ -1063,68 +1063,169 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
-      min-height: 60px;
+      min-height: 40px;
     }
 
     /* ==========================================================================
-       Education Section
+       Education Section (Visual Journey & Stepped Timeline)
        ========================================================================== */
-    .education-list {
-      display: grid;
-      gap: 20px;
+    .edu-journey-timeline {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      margin-top: 12px;
     }
 
-    .education-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 28px 32px;
+    .edu-journey-timeline::before {
+      content: "";
+      position: absolute;
+      top: 35px;
+      bottom: 35px;
+      left: 28px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent-cyan) 0%, var(--accent-indigo) 50%, var(--accent-emerald) 100%);
+      opacity: 0.35;
+      z-index: 0;
+    }
+
+    .edu-journey-step {
       display: flex;
-      justify-content: space-between;
+      gap: 26px;
+      position: relative;
+      z-index: 1;
+      align-items: flex-start;
+    }
+
+    .edu-step-node {
+      width: 58px;
+      height: 58px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 24px;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
       transition: var(--transition);
     }
 
-    .education-card:hover {
+    .edu-step-node.active-node {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
+    }
+
+    .edu-journey-step:hover .edu-step-node {
+      transform: scale(1.05);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.3);
+    }
+
+    .edu-node-number {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      line-height: 1;
+    }
+
+    .edu-node-label {
+      font-size: 0.6rem;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 3px;
+    }
+
+    .edu-step-card {
+      flex: 1;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 26px 30px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .edu-step-card.active-card {
+      border-color: rgba(56, 189, 248, 0.28);
+    }
+
+    .edu-journey-step:hover .edu-step-card {
       border-color: var(--border-glow);
       background: var(--bg-card-hover);
       transform: translateX(4px);
+      box-shadow: var(--shadow-md);
     }
 
-    .edu-degree {
-      font-size: 1.25rem;
+    .edu-step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .edu-phase-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
       font-weight: 700;
-      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
       margin-bottom: 6px;
     }
 
-    .edu-school {
-      font-size: 0.95rem;
-      color: var(--text-muted);
+    .edu-degree-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .edu-school-name {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .edu-meta {
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .edu-score {
+    .edu-score-badge {
       font-family: var(--font-mono);
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--accent-cyan);
-      display: block;
-      margin-bottom: 4px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 5px 13px;
+      border-radius: var(--radius-full);
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--accent-emerald);
+      white-space: nowrap;
     }
 
-    .edu-years {
+    .edu-step-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .edu-pill {
+      font-size: 0.75rem;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-dim);
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
     }
 
     /* ==========================================================================
@@ -1189,52 +1290,6 @@
       line-height: 1.4;
     }
 
-    /* Interactive Email Action Banner */
-    .email-quick-action {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      margin-top: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .email-action-text h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 2px;
-    }
-
-    .email-action-text p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .copy-email-btn {
-      padding: 9px 18px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid var(--accent-cyan);
-      border-radius: var(--radius-md);
-      color: var(--accent-cyan);
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: var(--transition);
-      font-family: var(--font-mono);
-    }
-
-    .copy-email-btn:hover {
-      background: var(--accent-cyan);
-      color: #04101d;
-    }
-
     /* Contact Direct Note Card */
     .contact-form-card {
       background: var(--bg-card);
@@ -1296,7 +1351,7 @@
        ========================================================================== */
     .footer {
       border-top: 1px solid var(--border-subtle);
-      padding: 48px 0 36px;
+      padding: 36px 0;
       background: rgba(6, 9, 19, 0.95);
       position: relative;
     }
@@ -1305,28 +1360,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
       gap: 24px;
     }
 
     .footer-copy {
       font-size: 0.875rem;
       color: var(--text-muted);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .footer-links a:hover {
-      color: var(--accent-cyan);
     }
 
     .back-to-top {
@@ -1422,15 +1461,6 @@
       .analytics-grid {
         grid-template-columns: 1fr;
       }
-
-      .education-card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .edu-meta {
-        text-align: left;
-      }
     }
 
     @media (max-width: 640px) {
@@ -1470,7 +1500,36 @@
         padding: 24px 20px;
       }
 
-      .footer-inner {
+      .edu-journey-timeline::before {
+        left: 21px;
+      }
+
+      .edu-journey-step {
+        gap: 14px;
+      }
+
+      .edu-step-node {
+        width: 44px;
+        height: 44px;
+      }
+
+      .edu-node-number {
+        font-size: 0.8rem;
+      }
+
+      .edu-node-label {
+        display: none;
+      }
+
+      .edu-step-card {
+        padding: 20px 18px;
+      }
+
+      .edu-degree-title {
+        font-size: 1.1rem;
+      }
+
+      .edu-step-header {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -1536,7 +1595,7 @@
         <div class="hero-content">
           <div class="hero-status-pill">
             <span class="status-dot"></span>
-            <span>AVAILABLE FOR OPPORTUNITIES &bull; HYDERABAD, INDIA</span>
+            <span>OPEN TO OPPORTUNITIES &bull; REMOTE &bull; ON-SITE &bull; HYBRID</span>
           </div>
 
           <h1 class="hero-title">
@@ -2148,59 +2207,108 @@
     </section>
 
     <!-- ==========================================================================
-         Education Section
+         Education Section (Visual Journey & Stepped Timeline)
          ========================================================================== -->
     <section id="education">
       <div class="container">
         <div class="section-header">
           <div class="section-eyebrow">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-            <span>Academic Qualifications</span>
+            <span>Academic Progression &bull; Journey</span>
           </div>
-          <h2 class="section-title">My <span>Education</span></h2>
-          <p class="section-desc">Formal academic background in Computer Science Engineering with specialization in Artificial Intelligence.</p>
+          <h2 class="section-title">Education <span>Journey</span></h2>
+          <p class="section-desc">Academic progression from secondary school foundation to specialized undergraduate engineering in Artificial Intelligence.</p>
         </div>
 
-        <div class="education-list">
-          <!-- B.Tech -->
-          <div class="education-card">
-            <div>
-              <h3 class="edu-degree">Bachelor of Engineering in Computer Science Engineering (Artificial Intelligence)</h3>
-              <div class="edu-school">
-                <span>Muffakham Jah College of Engineering and Technology (Affiliated to Osmania University / OUCE)</span>
-              </div>
+        <!-- Visual Education Journey / Stepped Timeline -->
+        <div class="edu-journey-timeline">
+          <!-- Step 1: Secondary School -->
+          <div class="edu-journey-step">
+            <div class="edu-step-node">
+              <span class="edu-node-number">01</span>
+              <span class="edu-node-label">PHASE</span>
             </div>
-            <div class="edu-meta">
-              <span class="edu-score">CGPA 8.1</span>
-              <span class="edu-years">2023 – 2027</span>
+            <div class="edu-step-card">
+              <div class="edu-step-header">
+                <div>
+                  <div class="edu-phase-tag">
+                    <span>STEP 01 &bull; SECONDARY EDUCATION</span>
+                  </div>
+                  <h3 class="edu-degree-title">Secondary School Certificate (SSC)</h3>
+                  <div class="edu-school-name">
+                    <span>Gowtham Model School</span>
+                    <span style="color:var(--text-dim)">&bull;</span>
+                    <span style="color:var(--text-muted); font-family:var(--font-mono); font-size:0.85rem;">2013 – 2021</span>
+                  </div>
+                </div>
+                <div class="edu-score-badge">CGPA 10.0 (Perfect Score)</div>
+              </div>
+              <div class="edu-step-pills">
+                <span class="edu-pill">Core Mathematics</span>
+                <span class="edu-pill">General Sciences</span>
+                <span class="edu-pill">Academic Distinction</span>
+              </div>
             </div>
           </div>
 
-          <!-- Intermediate -->
-          <div class="education-card">
-            <div>
-              <h3 class="edu-degree">Intermediate Education (TSBIE &bull; MPC Stream)</h3>
-              <div class="edu-school">
-                <span>Toppers Junior College</span>
-              </div>
+          <!-- Step 2: Intermediate -->
+          <div class="edu-journey-step">
+            <div class="edu-step-node">
+              <span class="edu-node-number">02</span>
+              <span class="edu-node-label">PHASE</span>
             </div>
-            <div class="edu-meta">
-              <span class="edu-score">CGPA 9.7</span>
-              <span class="edu-years">2021 – 2023</span>
+            <div class="edu-step-card">
+              <div class="edu-step-header">
+                <div>
+                  <div class="edu-phase-tag">
+                    <span>STEP 02 &bull; PRE-UNIVERSITY / INTERMEDIATE</span>
+                  </div>
+                  <h3 class="edu-degree-title">Intermediate Education (TSBIE &bull; MPC Stream)</h3>
+                  <div class="edu-school-name">
+                    <span>Toppers Junior College</span>
+                    <span style="color:var(--text-dim)">&bull;</span>
+                    <span style="color:var(--text-muted); font-family:var(--font-mono); font-size:0.85rem;">2021 – 2023</span>
+                  </div>
+                </div>
+                <div class="edu-score-badge">CGPA 9.7</div>
+              </div>
+              <div class="edu-step-pills">
+                <span class="edu-pill">Mathematics</span>
+                <span class="edu-pill">Physics</span>
+                <span class="edu-pill">Chemistry</span>
+                <span class="edu-pill">Analytical Problem Solving</span>
+              </div>
             </div>
           </div>
 
-          <!-- SSC -->
-          <div class="education-card">
-            <div>
-              <h3 class="edu-degree">Secondary School Certificate (SSC)</h3>
-              <div class="edu-school">
-                <span>Gowtham Model School</span>
-              </div>
+          <!-- Step 3: B.Tech -->
+          <div class="edu-journey-step">
+            <div class="edu-step-node active-node">
+              <span class="edu-node-number">03</span>
+              <span class="edu-node-label">SPECIAL</span>
             </div>
-            <div class="edu-meta">
-              <span class="edu-score">CGPA 10.0 (Perfect Score)</span>
-              <span class="edu-years">2013 – 2021</span>
+            <div class="edu-step-card active-card">
+              <div class="edu-step-header">
+                <div>
+                  <div class="edu-phase-tag" style="color:var(--accent-emerald);">
+                    <span>STEP 03 &bull; UNDERGRADUATE SPECIALIZATION</span>
+                  </div>
+                  <h3 class="edu-degree-title">Bachelor of Engineering in Computer Science Engineering (Artificial Intelligence)</h3>
+                  <div class="edu-school-name">
+                    <span>Muffakham Jah College of Engineering and Technology (Affiliated to Osmania University / OUCE)</span>
+                    <span style="color:var(--text-dim)">&bull;</span>
+                    <span style="color:var(--text-muted); font-family:var(--font-mono); font-size:0.85rem;">2023 – 2027</span>
+                  </div>
+                </div>
+                <div class="edu-score-badge" style="background:rgba(56,189,248,0.12); border-color:rgba(56,189,248,0.3); color:var(--accent-cyan);">CGPA 8.1</div>
+              </div>
+              <div class="edu-step-pills">
+                <span class="edu-pill">Artificial Intelligence</span>
+                <span class="edu-pill">Machine Learning</span>
+                <span class="edu-pill">Data Structures &amp; Algorithms</span>
+                <span class="edu-pill">Relational Databases &amp; SQL</span>
+                <span class="edu-pill">OUCE Affiliated</span>
+              </div>
             </div>
           </div>
         </div>
@@ -2264,18 +2372,6 @@
                 <span class="contact-val">github.com/abdulrasheedmd2005</span>
               </a>
             </div>
-
-            <!-- Quick Copy Email Banner -->
-            <div class="email-quick-action">
-              <div class="email-action-text">
-                <h4>Prefer One-Click Copy?</h4>
-                <p>abdulrasheedmd2005@gmail.com</p>
-              </div>
-              <button class="copy-email-btn" id="copyEmailBtn" aria-label="Copy email address to clipboard">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                <span id="copyBtnText">Copy Email</span>
-              </button>
-            </div>
           </div>
 
           <!-- Direct Message Form -->
@@ -2317,18 +2413,8 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-copy">
-        &copy; 2026 <strong>Mohammed Abdul Rasheed</strong> &bull; Crafted with precision for Data &amp; AI Engineering.
+        &copy; 2026 <strong>Mohammed Abdul Rasheed</strong>
       </div>
-
-      <ul class="footer-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
 
       <a href="#top" class="back-to-top" aria-label="Back to top">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
@@ -2339,7 +2425,7 @@
   <!-- Toast Notification Popup -->
   <div class="toast" id="toastBox">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-emerald)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-    <span id="toastMessage">Email copied to clipboard!</span>
+    <span id="toastMessage">Notification</span>
   </div>
 
   <!-- ==========================================================================
@@ -2428,9 +2514,8 @@
         });
       });
 
-      // 4. One-Click Copy Email
-      const copyEmailBtn = document.getElementById('copyEmailBtn');
-      const copyBtnText = document.getElementById('copyBtnText');
+      // 4. Contact Form to Mailto Handler
+      const contactForm = document.getElementById('contactForm');
       const toastBox = document.getElementById('toastBox');
       const toastMessage = document.getElementById('toastMessage');
       const userEmail = 'abdulrasheedmd2005@gmail.com';
@@ -2444,34 +2529,6 @@
         }, 3000);
       }
 
-      if (copyEmailBtn) {
-        copyEmailBtn.addEventListener('click', async () => {
-          try {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-              await navigator.clipboard.writeText(userEmail);
-            } else {
-              const textarea = document.createElement('textarea');
-              textarea.value = userEmail;
-              document.body.appendChild(textarea);
-              textarea.select();
-              document.execCommand('copy');
-              document.body.removeChild(textarea);
-            }
-
-            if (copyBtnText) copyBtnText.textContent = 'Copied!';
-            showToast('Email copied to clipboard: ' + userEmail);
-
-            setTimeout(() => {
-              if (copyBtnText) copyBtnText.textContent = 'Copy Email';
-            }, 2500);
-          } catch (err) {
-            showToast('Email: ' + userEmail);
-          }
-        });
-      }
-
-      // 5. Contact Form to Mailto Handler
-      const contactForm = document.getElementById('contactForm');
       if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
           e.preventDefault();
